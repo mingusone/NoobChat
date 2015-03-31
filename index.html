@@ -3,10 +3,36 @@
 <head>
 	<title>Noob Chat</title>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="main.js"></script>
-	<link rel="stylesheet" href="style.css">
-</head>
+	<!--<script src="/main.js"></script> //This is not working. Express not sending these dang files.-->
+	<script>
+	var socket = io.connect('http://localhost:8888');
 
+	socket.on('messages', function(data)
+	{
+		alert(data.hello);
+	});
+	</script>
+	<style>
+	#OutputBox {
+	overflow: auto;
+	border-style: solid;
+	border-width: 5px;
+	height: 50%;
+	width: 80%;
+	margin: auto;
+	}
+
+	#OutputBox {
+		overflow: auto;
+		border-style: solid;
+		border-width: 5px;
+		height: 50%;
+		width: 80%;
+		margin: auto;
+	}
+	</style>
+	<!--<link rel="stylesheet" href="/style.css"> // Same thing happening here. These files are not being retrieved by client-->
+</head>
 
 	<div id="OutputBox">
 		test
