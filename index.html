@@ -2,45 +2,59 @@
 <html>
 <head>
 	<title>Noob Chat</title>
-	<script src="/socket.io/socket.io.js"></script>
-	<!--<script src="/main.js"></script> //This is not working. Express not sending these dang files.-->
-	<script>
-	var socket = io.connect('http://localhost:8888');
-
-	socket.on('messages', function(data)
-	{
-		alert(data.hello);
-	});
-	</script>
 	<style>
 	#OutputBox {
 	overflow: auto;
 	border-style: solid;
 	border-width: 5px;
 	height: 50%;
+	min-height: 50%;
 	width: 80%;
+	min-width: 80%;
 	margin: auto;
+	padding: 25px;
 	}
 
-	#OutputBox {
-		overflow: auto;
+	#InputBox {
 		border-style: solid;
 		border-width: 5px;
 		height: 50%;
 		width: 80%;
 		margin: auto;
+		padding: 25px;
+	}
+
+	#InputTextBox{
+		width: 100%;
 	}
 	</style>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<!--<script src="/main.js"></script> //This is not working. Express not sending these dang files in a request. Find out why later.-->
 	<!--<link rel="stylesheet" href="/style.css"> // Same thing happening here. These files are not being retrieved by client-->
+	<script>
+	var socket = io.connect('http://localhost:8888');
+	socket.on('messages', function(data){
+		alert(data.hello);
+	});
+	$('#InputBox').submit( function(event){
+		socket.emit('NewChat', $('#InputTextBox').val());
+		$('InputTextBox').val('');
+		return false;
+	});
+	</script>	
 </head>
 
+<body>
 	<div id="OutputBox">
-		test
-		sfdsafdsfdfasgfhgfhdfg
-		ghdgfhfghgdfhfg
-		fgdhgfhgfdhfgdh
-		fgdhgfdhgfdhgfdhgfdhfgdh
-		gfdhgfdhfdghgfhgfdh
+		This is where chat text messages go.
+	</div>
+
+	<div id="InputBox">
+		<form action="">
+			<input id="InputTextBox" type="text" autocomplete="off">
+			<input type="submit" value="say">
+		</form>
 	</div>
 	<!--
 	<div id="InputBox">
@@ -49,5 +63,5 @@
 		</form>
 	</div>
 -->
-
+</body>
 </html>

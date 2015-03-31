@@ -1,13 +1,17 @@
 var app = require('express')();
-var server = require('http').createServer('app');
+var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-io.on('connection', function(socket){
+io.on('connection', function(client){
 	console.log("Client connected");
-	socket.on('disconnect',function(){
+	client.on('disconnect',function(socket){
 		console.log("client disconnected");
 	});
+	client.on('NewChat', function(chat){
+		console.log(chat);
+	});
 });
+
 
 /*
 io.on('disconnect', function(client) {
