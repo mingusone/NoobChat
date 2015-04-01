@@ -8,7 +8,7 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-io.set('origins', 'http://noobchat.herokuapp.com/:80'); // For firefox. Because of "Same origin policy"
+io.set('origins', '*:*'); // For firefox. Because of "Same origin policy"
 
 io.on('connection', function(client){
 	//console.log("Client connected");
