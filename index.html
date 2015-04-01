@@ -50,7 +50,7 @@
 		</form>
 	</div>
 	<script>
-	var socket = io.connect('http://localhost:8888');
+	var socket = io.connect('http://noobchat.herokuapp.com:80');
 	$('form').submit( function(){ //Why does this not work with #InputBox? It only works with form. 
 		socket.emit('NewChat', $('#message').val());
 		$('#message').val('');
